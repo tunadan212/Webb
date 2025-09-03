@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Unlock Script</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0d1b2a;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .card {
+      background-color: #1b263b;
+      padding: 25px 20px;
+      border-radius: 20px;
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    .title { font-size:24px; color:#4cc9f0; margin-bottom:8px; }
+    .subtitle { font-size:15px; color:#c0c0c0; margin-bottom:25px; }
+    .btn { width:100%; padding:12px; font-size:16px; border:none; border-radius:10px; margin:10px 0; cursor:pointer; font-weight:bold; }
+    .btn-follow { background-color:#3b82f6; color:white; }
+    .btn-like { background-color:#ec4899; color:white; }
+    .btn-acc { background-color:#a855f7; color:white; }
+    .btn.done::after { content:' ✅'; }
+    .dots { font-size:26px; margin:15px 0; display:none; animation: blink 1s infinite; }
+    @keyframes blink { 0% { opacity:0.3; } 50% { opacity:1; } 100% { opacity:0.3; } }
+    .btn-unlock { background-color:#10b981; color:white; display:none; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="title">🔑 Unlock Script</div>
+    <div class="subtitle">Hoàn thành nhiệm vụ để mở khóa script</div>
+
+    <button id="followBtn" class="btn btn-follow">📌 Follow TikTok</button>
+    <button id="likeBtn" class="btn btn-like">❤️ Tim Video</button>
+    <button id="accBtn" class="btn btn-acc">👉 Follow Acc 2</button>
+
+    <div class="dots" id="dots">...</div>
+    <button id="unlockBtn" class="btn btn-unlock">🔓 Unlock Script</button>
+  </div>
+
+  <script>
+    const followBtn = document.getElementById("followBtn");
+    const likeBtn = document.getElementById("likeBtn");
+    const accBtn = document.getElementById("accBtn");
+    const unlockBtn = document.getElementById("unlockBtn");
+    const dots = document.getElementById("dots");
+
+    let followDone = false;
+    let likeDone = false;
+    let accDone = false;
+
+    followBtn.onclick = () => {
+      window.open("https://www.tiktok.com/@trizo92?_t=ZS-8zQ0jXiiBgl&_r=1", "_blank");
+      followBtn.classList.add("done");
+      followDone = true;
+      checkDone();
+    };
+    likeBtn.onclick = () => {
+      window.open("https://www.tiktok.com/@trizo92?_t=ZS-8zQ0jXiiBgl&_r=1", "_blank");
+      likeBtn.classList.add("done");
+      likeDone = true;
+      checkDone();
+    };
+    accBtn.onclick = () => {
+      window.open("https://www.tiktok.com/@khng.script?_t=ZS-8zQ59MZ9ade&_r=1", "_blank");
+      accBtn.classList.add("done");
+      accDone = true;
+      checkDone();
+    };
+
+    function checkDone() {
+      if(followDone && likeDone && accDone){
+        dots.style.display = "block";
+        setTimeout(() => {
+          dots.style.display = "none";
+          unlockBtn.style.display = "block";
+        }, 2000);
+      }
+    }
+
+    unlockBtn.onclick = () => {
+      // Chuyển sang file script.html
+      window.location.href = "script.html";
+    };
+  </script>
+</body>
+</html>
