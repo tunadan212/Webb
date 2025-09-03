@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Script & Guide</title>
+  <style>
+    body {
+      margin:0;
+      font-family:'Segoe UI', sans-serif;
+      background-color:#0d1b2a;
+      color:white;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height:100vh;
+    }
+    .card {
+      background-color:#1b263b;
+      padding:25px 20px;
+      border-radius:20px;
+      text-align:center;
+      width:90%;
+      max-width:500px;
+      box-shadow:0 0 10px rgba(0,0,0,0.3);
+    }
+    #scriptBox {
+      background-color:#0f172a;
+      margin-top:20px;
+      padding:15px;
+      border-radius:10px;
+      word-break:break-word;
+      font-size:14px;
+    }
+    #copyBtn {
+      margin-top:10px;
+      padding:10px 20px;
+      background-color:#22c55e;
+      border:none;
+      border-radius:8px;
+      color:white;
+      cursor:pointer;
+    }
+    #guideBox {
+      background-color:#0f172a;
+      margin-top:20px;
+      padding:15px;
+      border-radius:10px;
+      font-size:14px;
+      color:#e0e0e0;
+      text-align:left;
+      line-height:1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div id="scriptBox">
+      <code id="scriptText">
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Khangdz28/Base/refs/heads/main/Khngscript"))()
+      </code>
+      <br>
+      <button id="copyBtn">📋 Sao chép Script</button>
+    </div>
+
+    <div id="guideBox">
+      <div style="font-weight:bold; color:#4cc9f0; font-size:16px; margin-bottom:10px;">📘 Hướng Dẫn Sử Dụng</div>
+      Có thể sử dụng mọi executor nào bạn muốn<br>
+      Bật lên và sử dụng như bình thường<br><br>
+      • Bước 1: Ấn vào logo executor<br>
+      • Bước 2: Ấn vào setting<br>
+      • Bước 3: Tắt <strong>anti scam</strong><br>
+      • Bước 4: Tắt <strong>verify teleport</strong><br>
+      <em style="color:#f87171;">(MẤY CHỐT ĐỂ SỬ DỤNG TẤT CẢ CHỨC NĂNG, NẾU KHÔNG TẮT SẼ BỊ MẤT DATA)</em><br><br>
+      ➤ Sau đó out game → vô lại → executor script và tận hưởng pet 🤑🤑<br><br>
+      <strong style="color:#a3e635;">Mình sẽ ra nhiều bản ngon hơn, mong mọi người ủng hộ 🥹🥹🥹</strong>
+    </div>
+  </div>
+
+  <script>
+    const copyBtn = document.getElementById("copyBtn");
+    const scriptText = document.getElementById("scriptText").innerText;
+
+    copyBtn.onclick = () => {
+      navigator.clipboard.writeText(scriptText).then(() => {
+        copyBtn.innerText = "✅ Đã sao chép!";
+        setTimeout(() => { copyBtn.innerText = "📋 Sao chép Script"; }, 2000);
+      });
+    };
+  </script>
+</body>
+</html>
