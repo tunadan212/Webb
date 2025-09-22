@@ -35,9 +35,10 @@
     .dots { font-size:26px; margin:15px 0; display:none; animation: blink 1s infinite; }
     @keyframes blink { 0% { opacity:0.3; } 50% { opacity:1; } 100% { opacity:0.3; } }
     .btn-unlock { background-color:#10b981; color:white; display:none; }
-    /* Thanh tiến độ tổng */
-    .progress-container { width:100%; background:#2d3d5a; border-radius:10px; overflow:hidden; height:14px; margin:20px 0; }
-    .progress-bar { width:0%; height:100%; background:#4cc9f0; transition: width 1s ease; }
+    /* Thanh tiến độ */
+    .progress-container { width:100%; background:#2d3d5a; border-radius:10px; overflow:hidden; height:18px; margin:20px 0; position:relative; }
+    .progress-bar { width:0%; height:100%; background:#4cc9f0; transition: width 0.5s ease; }
+    .progress-text { position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); font-size:12px; color:white; font-weight:bold; }
   </style>
 </head>
 <body>
@@ -46,12 +47,13 @@
     <div class="subtitle">Hoàn thành nhiệm vụ để mở khóa script</div>
 
     <button id="followBtn" class="btn btn-follow">📌 Follow TikTok</button>
-    <button id="likeBtn" class="btn btn-like">❤️ Đăng kí YT</button>
-    <button id="likeBtn" class="btn btn-like">Follow Tiktok 2</button>
-    <button id="accBtn" class="btn btn-acc">👉 Follow Acc 3 </button>
+    <button id="ytBtn" class="btn btn-like">❤️ Đăng kí YT</button>
+    <button id="tiktok2Btn" class="btn btn-like">📌 Follow TikTok 2</button>
+    <button id="accBtn" class="btn btn-acc">👉 Follow Acc 3</button>
 
     <div class="progress-container">
       <div class="progress-bar" id="progressBar"></div>
+      <div class="progress-text" id="progressText">0%</div>
     </div>
 
     <div class="dots" id="dots">...</div>
@@ -59,34 +61,38 @@
   </div>
 
   <script>
-    const followBtn = document.getElementById("followBtn");
-    const likeBtn = document.getElementById("likeBtn");
-    const accBtn = document.getElementById("accBtn");
+    const tasks = [
+      { id: "followBtn", url: "https://www.tiktok.com/@trizo92?_t=ZS-8zQ0jXiiBgl&_r=1" },
+      { id: "ytBtn", url: "https://youtube.com/@khngscript?si=dfcm63aGA7xkdIcX" },
+      { id: "tiktok2Btn", url: "https://www.tiktok.com/@nam.hahgaj?_t=ZS-8zwGMzM74GG&_r=1" },
+      { id: "accBtn", url: "https://www.tiktok.com/@khng.script?_t=ZS-8zQ59MZ9ade&_r=1" }
+    ];
+
     const unlockBtn = document.getElementById("unlockBtn");
     const dots = document.getElementById("dots");
     const progressBar = document.getElementById("progressBar");
+    const progressText = document.getElementById("progressText");
 
     let tasksDone = 0;
 
     function handleTask(btn, url) {
-      if (btn.disabled) return;
+      if (btn.classList.contains("done")) return; // đã làm thì bỏ qua
       window.open(url, "_blank");
       btn.disabled = true;
 
-      // Delay 5s để chống spam
       setTimeout(() => {
         btn.classList.add("done");
         tasksDone++;
         updateProgress();
-        btn.disabled = false; // mở lại nếu muốn
-      }, 5000);
+      }, 3000);
     }
 
     function updateProgress() {
-      let percent = (tasksDone / 4) * 100;
+      let percent = Math.round((tasksDone / tasks.length) * 100);
       progressBar.style.width = percent + "%";
+      progressText.textContent = percent + "%";
 
-      if (tasksDone === 4) {
+      if (tasksDone === tasks.length) {
         dots.style.display = "block";
         setTimeout(() => {
           dots.style.display = "none";
@@ -95,10 +101,10 @@
       }
     }
 
-    followBtn.onclick = () => handleTask(followBtn, "https://www.tiktok.com/@trizo92?_t=ZS-8zQ0jXiiBgl&_r=1");
-    likeBtn.onclick = () => handleTask(likeBtn, "https://youtube.com/@khngscript?si=dfcm63aGA7xkdIcX");
-    likeBtn.onclick = () => handleTask(likeBtn, "https://www.tiktok.com/@nam.hahgaj?_t=ZS-8zwGMzM74GG&_r=1");
-    accBtn.onclick = () => handleTask(accBtn, "https://www.tiktok.com/@khng.script?_t=ZS-8zQ59MZ9ade&_r=1");
+    tasks.forEach(task => {
+      const btn = document.getElementById(task.id);
+      btn.onclick = () => handleTask(btn, task.url);
+    });
 
     unlockBtn.onclick = () => {
       window.location.href = "script.html";
